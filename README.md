@@ -2,9 +2,9 @@
 
 **Master the Art of AI-Assisted Development — Modernizing the Way You Build.**
 
-This repository is a hands-on supplement to the **Power BI’s AI Toolkit** series on [ethanguyant.com](https://ethanguyant.com). As the business intelligence landscape shifts toward AI-augmented workflows, this blog series and toolkit offer practical patterns, prompt strategies, and quickstart guides to help you build faster and smarter.
+Welcome to the Power BI’s AI Toolkit repository. This project serves as a central hub for the practical patterns, prompts, and architectural strategies discussed in the Power BI’s AI Toolkit series on [ethanguyant.com](ethanguyant.com).
 
-Each entry in this repository includes a working `.pbix` file, sample data, and documentation on the AI prompts used to generate or debug the included logic.
+In an era where AI is moving from experimental to essential, this toolkit is designed to help Power BI developers explore AI workflows, learn Power BI AI tools, and get started on your journey modernizing the way you build!
 
 ## 📖 Series Index
 
@@ -30,3 +30,10 @@ To get the most out of this toolkit, you should:
 
 ## ⚠️ Disclaimer
 This repository is designed for educational purposes. While the AI-generated DAX provided here has been vetted for logic and performance, always validate code against your specific production data models and security requirements.
+
+---
+
+## Connect & Explore:
+[ethanguyant.com](ethanguyant.com)  | [Power Studio365](powerstudio365.com)
+
+© 2026 Power Studio 365 LLC
