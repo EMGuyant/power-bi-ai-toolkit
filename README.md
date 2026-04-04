@@ -4,7 +4,7 @@
 
 Welcome to the Power BI’s AI Toolkit repository. This project serves as a central hub for the practical patterns, prompts, and architectural strategies discussed in the Power BI’s AI Toolkit series on [ethanguyant.com](ethanguyant.com).
 
-In an era where AI is moving from experimental to essential, this toolkit is designed to help Power BI developers explore AI workflows, learn Power BI AI tools, and get started on your journey modernizing the way you build!
+In an era where AI is moving from experimental to essential, this toolkit is designed to help Power BI developers explore AI workflows, learn Power BI AI tools, and get started on their journey to modernize the way they build!
 
 ## 📖 Series Index
 
@@ -35,5 +35,3 @@ This repository is designed for educational purposes. While the AI-generated DAX
 
 ## Connect & Explore:
 [ethanguyant.com](ethanguyant.com)  | [Power Studio365](powerstudio365.com)
-
-© 2026 Power Studio 365 LLC
