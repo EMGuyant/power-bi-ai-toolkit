@@ -6,7 +6,7 @@ In this post, we put Copilot to work across five realistic scenarios, grading ea
 - 🔴 **Red Light** — Human needs to drive.
 
 ⚡ **Quick Links**  
-- 📖 Read the Full blog post: [Testing Copilot's Ability to Write, Explain, and Debug DAX in Power BI Desktop](https://ethanguyant.com/2025/09/15/design-meets-data-from-static-slicers-to-interactive-decision-aids/)
+- 📖 Read the Full blog post: [Power BI's AI Toolkit: Evaluating Copilot for DAX Development in Power BI Desktop](https://ethanguyant.com/2026/04/07/power-bi-ai-toolkit-testing-copilots-ability-to-write-explain-and-debug-dax-in-power-bi-desktop/)
 - 📁 Sample file: [`copilot-powerbi-desktop`](./sample-file/copilot-powerbi-desktop.pbix)
 
 ---
