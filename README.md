@@ -8,7 +8,7 @@ In an era where AI is moving from experimental to essential, this toolkit is des
 
 ## 📖 Series Index
 
-### [01 – Testing Copilot's Ability to Write, Explain, and Debug in Power BI Desktop](./01-copilot-pbi-desktop/copilot-pbi-desktop.md)
+### [01 – Evaluating Copilot for DAX Development in Power BI Desktop](./01-copilot-pbi-desktop/copilot-pbi-desktop.md)
 Explore how to use Copilot in Power BI Desktop to develop and understand the data model and its DAX measures.
 
 ## 🛠 How to Use
