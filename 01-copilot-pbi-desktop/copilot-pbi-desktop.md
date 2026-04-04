@@ -50,6 +50,3 @@ To use this toolkit, you require:
 * **Preview Features:** "DAX query view with Copilot" enabled in Options.
 
 ---
-*"Anyone who has never made a mistake has never tried anything new."* — Albert Einstein
-
-© 2026 Power Studio 365 LLC | [powerstudio365.com](https://powerstudio365.com)
