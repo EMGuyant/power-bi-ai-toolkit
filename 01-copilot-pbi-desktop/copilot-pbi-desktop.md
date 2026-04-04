@@ -7,7 +7,7 @@ In this post, we put Copilot to work across five realistic scenarios, grading ea
 
 ⚡ **Quick Links**  
 - 📖 Read the Full blog post: [Testing Copilot's Ability to Write, Explain, and Debug DAX in Power BI Desktop](https://ethanguyant.com/2025/09/15/design-meets-data-from-static-slicers-to-interactive-decision-aids/)
-- 📁 Sample file: [`dynamic-slicers-data-previews.pbix`](./PBIX/dynamic-slicers-data-previews.pbix)
+- 📁 Sample file: [`copilot-powerbi-desktop`](./sample-file/copilot-powerbi-desktop.pbix)
 
 ---
 
