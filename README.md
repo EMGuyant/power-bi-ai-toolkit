@@ -2,7 +2,7 @@
 
 **Master the Art of AI-Assisted Development — Modernizing the Way You Build.**
 
-Welcome to the Power BI’s AI Toolkit repository. This project serves as a central hub for the practical patterns, prompts, and architectural strategies discussed in the Power BI’s AI Toolkit series on [ethanguyant.com](ethanguyant.com).
+Welcome to the Power BI’s AI Toolkit repository. This project serves as a central hub for the practical patterns, prompts, and architectural strategies discussed in the Power BI’s AI Toolkit series on [ethanguyant.com](https://ethanguyant.com).
 
 In an era where AI is moving from experimental to essential, this toolkit is designed to help Power BI developers explore AI workflows, learn Power BI AI tools, and get started on their journey to modernize the way they build!
 
@@ -34,4 +34,4 @@ This repository is designed for educational purposes. While the AI-generated DAX
 ---
 
 ## Connect & Explore:
-[ethanguyant.com](ethanguyant.com)  | [Power Studio365](powerstudio365.com)
+[ethanguyant.com](https://ethanguyant.com)  | [Power Studio365](https://powerstudio365.com)
