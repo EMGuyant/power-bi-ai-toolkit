@@ -11,6 +11,9 @@ In an era where AI is moving from experimental to essential, this toolkit is des
 ### [01 – Evaluating Copilot for DAX Development in Power BI Desktop](./01-copilot-pbi-desktop/copilot-pbi-desktop.md)
 Explore how to use Copilot in Power BI Desktop to develop and understand the data model and its DAX measures.
 
+### [02 – Build Better Reports Faster with Copilot in Power BI Desktop](./02-copilot-pbi-desktop-report/copilot-pbi-desktop-report.md)
+Explore how to use Power BI Copilot to design report pages, generate visuals, and go from blank canvas to something reviewable — without leaving Power BI Desktop.
+
 ## 🛠 How to Use
 
 1. **Clone or download** this repository to your local machine.
