@@ -1,0 +1,95 @@
+table Sales
+	lineageTag: 049fae38-d92d-43f7-ba09-70203792ad1c
+
+	measure 'Test Measure' = 1
+		lineageTag: 93556918-823d-4f4c-b315-828e09bd08d4
+
+	column SalesID
+		dataType: int64
+		formatString: 0
+		lineageTag: fd5a9338-1af0-4357-abfa-53a0dd37db31
+		summarizeBy: count
+		sourceColumn: SalesID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductID
+		dataType: int64
+		formatString: 0
+		lineageTag: 669400ca-93ce-47df-b79a-c799d067493b
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column RegionID
+		dataType: int64
+		formatString: 0
+		lineageTag: 8308bd08-7a34-445c-8206-9f57343ddafd
+		summarizeBy: none
+		sourceColumn: RegionID
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmployeeID
+		dataType: int64
+		formatString: 0
+		lineageTag: fabf7c60-65bd-40cc-b429-68f9ce9131f3
+		summarizeBy: none
+		sourceColumn: EmployeeID
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalesDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c043d191-23d3-41ca-91d9-5f97a3f8c1b0
+		summarizeBy: none
+		sourceColumn: SalesDate
+
+		variation Variation
+			isDefault
+			relationship: bd2d7820-107f-4b0e-93ba-926b8e066e36
+			defaultHierarchy: LocalDateTable_8c493ee4-3ad6-4e77-801a-7c5f9c8e129c.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Amount
+		dataType: int64
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: ebd472cd-4ae9-4fe5-9497-d75cec01486a
+		summarizeBy: sum
+		sourceColumn: Amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Key' = FORMAT(Sales[SalesDate], "YYYYMMDD")
+		lineageTag: 8c0851ab-bd17-4b55-9ec5-ed68b715c721
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerID
+		dataType: string
+		lineageTag: 2b56cb23-0cc0-40f8-ba27-31e5d0b3cf40
+		summarizeBy: none
+		sourceColumn: CustomerID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Sales = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\temp\data\sample-data-sales.csv"),[Delimiter=",", Columns=7, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"SalesID", Int64.Type}, {"ProductID", Int64.Type}, {"RegionID", Int64.Type}, {"EmployeeID", Int64.Type}, {"SalesDate", type date}, {"Amount", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

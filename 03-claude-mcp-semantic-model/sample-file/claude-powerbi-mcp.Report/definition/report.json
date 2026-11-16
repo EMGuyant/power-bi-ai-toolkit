@@ -1,0 +1,220 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.3.0/schema.json",
+  "themeCollection": {
+    "baseTheme": {
+      "name": "CY24SU06",
+      "reportVersionAtImport": {
+        "visual": "1.8.91",
+        "report": "2.0.91",
+        "page": "1.3.91"
+      },
+      "type": "SharedResources"
+    },
+    "customTheme": {
+      "name": "blue-green-orange-accent9222952407926384.json",
+      "reportVersionAtImport": {
+        "visual": "1.8.91",
+        "report": "2.0.91",
+        "page": "1.3.91"
+      },
+      "type": "RegisteredResources"
+    }
+  },
+  "objects": {
+    "section": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Top'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "visible": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          },
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "publicCustomVisuals": [
+    "WordCloud1447959067750",
+    "htmlContent443BE3AD55E043BF878BED274D3A6865",
+    "htmlContent443BE3AD55E043BF878BED274D3A6855"
+  ],
+  "resourcePackages": [
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "asia8188125849871379.png",
+          "path": "asia8188125849871379.png",
+          "type": "Image"
+        },
+        {
+          "name": "blue-green-orange-accent9222952407926384.json",
+          "path": "blue-green-orange-accent9222952407926384.json",
+          "type": "Image"
+        },
+        {
+          "name": "eg-logo-active_(1)4191119557539229.svg",
+          "path": "eg-logo-active_(1)4191119557539229.svg",
+          "type": "Image"
+        },
+        {
+          "name": "eg-logo-base_(1)028756897736744946.svg",
+          "path": "eg-logo-base_(1)028756897736744946.svg",
+          "type": "Image"
+        },
+        {
+          "name": "eg-logo-base_(1)8305907794486085.svg",
+          "path": "eg-logo-base_(1)8305907794486085.svg",
+          "type": "Image"
+        },
+        {
+          "name": "eg-logo-hover_(1)41768055578618424.svg",
+          "path": "eg-logo-hover_(1)41768055578618424.svg",
+          "type": "Image"
+        },
+        {
+          "name": "eg-logo-hover_(1)6247819558516603.svg",
+          "path": "eg-logo-hover_(1)6247819558516603.svg",
+          "type": "Image"
+        },
+        {
+          "name": "eg-logo-select_(1)8222881340807036.svg",
+          "path": "eg-logo-select_(1)8222881340807036.svg",
+          "type": "Image"
+        },
+        {
+          "name": "eg-logo-select_(1)8359031475765988.svg",
+          "path": "eg-logo-select_(1)8359031475765988.svg",
+          "type": "Image"
+        },
+        {
+          "name": "europe041185830264043766.png",
+          "path": "europe041185830264043766.png",
+          "type": "Image"
+        },
+        {
+          "name": "Frame_1_(2)2063015891414497.png",
+          "path": "Frame_1_(2)2063015891414497.png",
+          "type": "Image"
+        },
+        {
+          "name": "github-active8097695422428832.svg",
+          "path": "github-active8097695422428832.svg",
+          "type": "Image"
+        },
+        {
+          "name": "github-base3977422909117705.svg",
+          "path": "github-base3977422909117705.svg",
+          "type": "Image"
+        },
+        {
+          "name": "github-hover9695594834473693.svg",
+          "path": "github-hover9695594834473693.svg",
+          "type": "Image"
+        },
+        {
+          "name": "github-select502377418742733.svg",
+          "path": "github-select502377418742733.svg",
+          "type": "Image"
+        },
+        {
+          "name": "linkedin-active08600355917125047.svg",
+          "path": "linkedin-active08600355917125047.svg",
+          "type": "Image"
+        },
+        {
+          "name": "linkedin-base8272115222005538.svg",
+          "path": "linkedin-base8272115222005538.svg",
+          "type": "Image"
+        },
+        {
+          "name": "linkedin-hover7729955902800298.svg",
+          "path": "linkedin-hover7729955902800298.svg",
+          "type": "Image"
+        },
+        {
+          "name": "linkedin-select13775988425641517.svg",
+          "path": "linkedin-select13775988425641517.svg",
+          "type": "Image"
+        },
+        {
+          "name": "LinkedInPhoto11137013045879351.png",
+          "path": "LinkedInPhoto11137013045879351.png",
+          "type": "Image"
+        },
+        {
+          "name": "Logo-withPhrase_(3)17203430313715584.svg",
+          "path": "Logo-withPhrase_(3)17203430313715584.svg",
+          "type": "Image"
+        },
+        {
+          "name": "medium-active08273635286147307.svg",
+          "path": "medium-active08273635286147307.svg",
+          "type": "Image"
+        },
+        {
+          "name": "medium-base08132157567630949.svg",
+          "path": "medium-base08132157567630949.svg",
+          "type": "Image"
+        },
+        {
+          "name": "medium-hover3790053685803121.svg",
+          "path": "medium-hover3790053685803121.svg",
+          "type": "Image"
+        },
+        {
+          "name": "medium-select25405415729007497.svg",
+          "path": "medium-select25405415729007497.svg",
+          "type": "Image"
+        },
+        {
+          "name": "north-america865406663334815.png",
+          "path": "north-america865406663334815.png",
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "name": "SharedResources",
+      "type": "SharedResources",
+      "items": [
+        {
+          "name": "CY24SU06",
+          "path": "BaseThemes/CY24SU06.json",
+          "type": "BaseTheme"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "useStylableVisualContainerHeader": true,
+    "exportDataMode": "AllowSummarized",
+    "defaultDrillFilterOtherVisuals": true,
+    "allowChangeFilterTypes": true,
+    "useEnhancedTooltips": true,
+    "useDefaultAggregateDisplayName": true
+  }
+}

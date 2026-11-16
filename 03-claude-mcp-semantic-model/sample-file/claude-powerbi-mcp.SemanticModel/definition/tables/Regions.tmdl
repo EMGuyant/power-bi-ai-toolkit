@@ -1,0 +1,33 @@
+table Regions
+	lineageTag: 42d3915a-56f2-49a0-8122-ebe5114f2deb
+
+	column RegionID
+		dataType: int64
+		formatString: 0
+		lineageTag: fd17cd44-d2bb-41fc-b5ba-ed8a1d4da3c2
+		summarizeBy: none
+		sourceColumn: RegionID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: 6c5b6086-a345-4b7e-84fc-1deb0dc5347b
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Regions = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMlTSUQrNyyxJTVEILkksSS1WitWJVjICirqWFuUXpIK5xkCuY3FmolJsLAA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [RegionID = _t, Region = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"RegionID", Int64.Type}, {"Region", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

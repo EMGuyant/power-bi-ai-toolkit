@@ -1,0 +1,15 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "6544e390d4bcedb3747e",
+  "displayName": "Sales Overview",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "visualInteractions": [
+    {
+      "source": "a0f9759b173d8e6f9a8b",
+      "target": "46504ed7b06697a333b2",
+      "type": "DataFilter"
+    }
+  ]
+}

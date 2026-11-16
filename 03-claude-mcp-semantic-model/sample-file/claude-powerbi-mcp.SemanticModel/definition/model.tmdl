@@ -1,0 +1,24 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode","DaxQueryView_Desktop","Copilot","CopilotMeasureDescriptions","DaxCopilot_Change_Accepted_In_Desktop","TMDLView_Desktop"]
+
+annotation PBI_QueryOrder = ["Employee","Products","Regions","Sales"]
+
+ref table DateTableTemplate_ab5c2ea0-9b35-4f92-b27d-635c56fb6330
+ref table Employee
+ref table Products
+ref table Regions
+ref table Sales
+ref table LocalDateTable_8c493ee4-3ad6-4e77-801a-7c5f9c8e129c
+ref table _Measures
+
+ref cultureInfo en-US
+

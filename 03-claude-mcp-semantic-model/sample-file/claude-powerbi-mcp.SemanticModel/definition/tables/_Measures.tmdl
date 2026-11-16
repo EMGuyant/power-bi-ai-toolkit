@@ -1,0 +1,492 @@
+table _Measures
+	lineageTag: b6909707-4085-4814-802c-30cef14b9bdf
+
+	measure 'Sales Metric (CY)' = ```
+			
+			VAR _currentYear = YEAR(MAX(Sales[SalesDate]))
+			RETURN
+			CALCULATE([Total Sales], DateTable[Year]=_currentYear)
+			    
+			```
+		displayFolder: Sales\Current Year
+		lineageTag: 506e94a7-eb0c-4a8c-b578-43309ee4c61b
+
+		formatStringDefinition = "\$#,0.00;(\$#,0.00);\$#,0.00"
+
+	measure 'Sales Metric (LY)' = ```
+			VAR _lastYear = YEAR(MAX(Sales[SalesDate]))-1
+			VAR _currentYear = YEAR([Current Date])
+			VAR _endOfCurrentMonth = EOMONTH([Current Date], 0)
+			VAR _selectedYearCat = SELECTEDVALUE(DateTable[Year Category])
+			
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    _selectedYearCat = "This Year",
+			        CALCULATE([Total Sales], SAMEPERIODLASTYEAR(DATESBETWEEN(DateTable[Date], DATE(_currentYear, 1, 1), _endOfCurrentMonth))),
+			    _selectedYearCat <> "This Year",
+			        CALCULATE([Total Sales], ALL(DateTable), DateTable[Year]=_lastYear)
+			)
+			    
+			```
+		displayFolder: Sales\Last Year
+		lineageTag: 07ff4f4a-69c5-4fac-955a-caff07c731d5
+
+		formatStringDefinition = "\$#,0.00;(\$#,0.00);\$#,0.00"
+
+	measure 'Sales Metric YOY' = ```
+			
+			VAR _cy = [Sales Metric (CY)]
+			VAR _ly = [Sales Metric (LY)]
+			
+			RETURN
+			IF(
+			    ISBLANK(_cy) || ISBLANK(_ly),
+			    BLANK(),
+			    DIVIDE(_cy-_ly, _ly)
+			)
+			    
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Sales\YoY
+		lineageTag: 8cf15419-276c-4fa8-b685-a07230778bbd
+
+	measure 'Sales Metric YOY Label' = ```
+			If(
+			    [Sales Metric YOY]>0, 
+			    UNICHAR(11165) & " " & FORMAT([Sales Metric YOY], "#0.0%"),
+			    UNICHAR(11167) & " " & FORMAT([Sales Metric YOY], "#0.0%")
+			)
+			    
+			```
+		displayFolder: Sales\YoY
+		lineageTag: 0f8f7b4b-06f6-4d6b-b365-05bbc9edb756
+
+	measure 'Annual Sales Performance Label' = ```
+			[Sales Metric YOY Label] & 
+			If(SELECTEDVALUE(DateTable[Year Category]) = "This year",
+			    " compared to this time last year.",
+			    " compared to " & YEAR(MAX(DateTable[Date])) - 1 & " sales."
+			)
+			    
+			```
+		displayFolder: Formatting
+		lineageTag: 1aaf6d05-e133-443a-8ebb-80e35bc1d7b2
+
+	measure 'Current to Last Delta' = ```
+			[Sales Metric (CY)] - [Sales Metric (LY)]
+			    
+			```
+		displayFolder: Sales\Compares
+		lineageTag: 022fcfd8-70fc-4352-ac4f-de86b471f041
+
+		formatStringDefinition = "\$#,0.00;(\$#,0.00);\$#,0.00"
+
+	measure 'Annual Sales Title' = ```
+			"Breaking down the " & FORMAT([Sales Metric (CY)], "$#,.00K") & 
+			IF(
+			    SELECTEDVALUE(DateTable[Year Category]) = "This Year",
+			    " in annual sales",
+			    " of annual sales in " & YEAR(MAX(DateTable[Date]))
+			)
+			    
+			```
+		displayFolder: Formatting
+		lineageTag: 10acf717-ccf0-40ad-b929-b3c7f7cd9f28
+
+	measure 'Annual Sales SubTitle' = ```
+			VAR _groupByProduct = 
+			    ADDCOLUMNS(
+			        SUMMARIZE(Sales, Products[Product], "TotalSalesCY", [Sales Metric (CY)]), 
+			        "YOY", [Sales Metric YOY]
+			    )
+			VAR _topProductBySales = TOPN(1, _groupByProduct, [TotalSalesCY],DESC)
+			VAR _topProductCategoryBySales = MAXX(_topProductBySales, Products[Product])
+			VAR _topProductSalesValueBySales = MAXX(_topProductBySales, [TotalSalesCY])
+			
+			VAR _topProductByYOY = TOPN(1, _groupByProduct, [YOY], DESC)
+			VAR _topProductCategoryByYOY = MAXX(_topProductByYOY, Products[Product])
+			VAR _topProductYOYValueByYOY = MAXX(_topProductByYOY, [YOY])
+			
+			VAR _topProductCheck = _topProductCategoryBySales=_topProductCategoryByYOY
+			RETURN
+			IF(
+			    SELECTEDVALUE(DateTable[Year Category])="This Year",
+			    _topProductCategoryBySales & " leads the way with " & FORMAT(_topProductSalesValueBySales, "$#,.00K") & " in sales" & IF(_topProductCheck, " and ", ", while ") & _topProductCategoryByYOY & " has the highest YoY growth of " & FORMAT(_topProductYOYValueByYOY, "0%"),
+			    _topProductCategoryBySales & " led " & YEAR(MAX(DateTable[Date])) & " with " & FORMAT(_topProductSalesValueBySales, "$#,.00K") & " in sales" & IF(_topProductCheck, " and ", ", while ") & _topProductCategoryByYOY & " has the highest YoY growth of " & FORMAT(_topProductYOYValueByYOY, "0%")
+			)
+			    
+			```
+		displayFolder: Formatting
+		lineageTag: 8b454275-f111-44c7-842f-095f54c1e528
+
+	measure 'Smartphone CY Sales' = ```
+			CALCULATE([Sales Metric (CY)], Products[Product]="Smartphone")
+			    
+			```
+		displayFolder: Sales\Smartphone
+		lineageTag: 07feb6d0-954e-4675-b607-d3a90bcde26b
+
+		formatStringDefinition = "\$#,0.00;(\$#,0.00);\$#,0.00"
+
+	measure 'Headphones Sales Metric (Total)' = ```
+			CALCULATE([Total Sales], ALL(Sales), Products[Product]="Headphones"
+			)
+			    
+			```
+		displayFolder: Sales\Headphones
+		lineageTag: 2b00d249-c0e9-4414-a0f6-398046518e86
+
+		formatStringDefinition = "\$#,,0;(\$#,0.00);\$#,0.00"
+
+	measure Headphones_Sales_Metric_CY = ```
+			CALCULATE([Sales Metric (CY)], Products[Product]="Headphones")
+			    
+			```
+		displayFolder: Sales\Headphones
+		lineageTag: 4e7a496f-7eae-4867-a00c-0c1d7b8ba4cf
+
+		formatStringDefinition = "\$#,0.00;(\$#,0.00);\$#,0.00"
+
+	measure 'Tablet Sales Metric (CY)' = ```
+			CALCULATE([Sales Metric (CY)], Products[Product]="Tablet")
+			    
+			```
+		displayFolder: Sales\Tablet
+		lineageTag: 56a13005-ae61-4100-a287-c8578a40bbdc
+
+		formatStringDefinition = "\$#,0.00;(\$#,0.00);\$#,0.00"
+
+	measure laptop_sales_cy = ```
+			CALCULATE([Sales Metric (CY)], Products[Product]="Laptop")
+			    
+			```
+		displayFolder: Sales\Laptop
+		lineageTag: e5a06270-83d3-4be9-a777-695289cbce88
+
+		formatStringDefinition = "\$#,0.00;(\$#,0.00);\$#,0.00"
+
+	measure 'TV Sales Metric (CY)' = ```
+			CALCULATE([Sales Metric (CY)], Products[Product]="TV")
+			    
+			```
+		displayFolder: Sales\TV
+		lineageTag: da18aef7-a0c7-4106-a23f-432857abcd22
+
+		formatStringDefinition = "\$#,0.00;(\$#,0.00);\$#,0.00"
+
+	measure 'Laptop Sales Metric (Total)' = ```
+			CALCULATE([Total Sales], ALL(Sales), Products[Product]="Laptop")
+			    
+			```
+		displayFolder: Sales\Laptop
+		lineageTag: e18e8cf4-c0ff-49eb-86fe-120562b05ab5
+
+		formatStringDefinition = "\$#,,0;(\$#,0.00);\$#,0.00"
+
+	measure 'Smartphone Sales Metric (Total)' = ```
+			CALCULATE([Total Sales], ALL(Sales), Products[Product]="Smartphone")
+			    
+			```
+		displayFolder: Sales\Smartphone
+		lineageTag: 897ff500-df22-49e3-b8ff-b1a25307563f
+
+		formatStringDefinition = "\$#,,0;(\$#,0.00);\$#,0.00"
+
+	measure 'tblt sales total' = ```
+			CALCULATE([Total Sales], ALL(Sales), Products[Product]="Tablet")
+			    
+			```
+		displayFolder: Sales\Tablet
+		lineageTag: dbc93fca-c52d-43de-b499-aedfc391dc00
+
+		formatStringDefinition = "\$#,,0;(\$#,0.00);\$#,0.00"
+
+	measure 'TV Sales (Total)' = ```
+			CALCULATE([Total Sales], ALL(Sales), Products[Product]="TV")
+			    
+			```
+		displayFolder: Sales\TV
+		lineageTag: 0502531f-7e5e-491b-bcb1-e2a912665536
+
+		formatStringDefinition = "\$#,,0;(\$#,0.00);\$#,0.00"
+
+	measure 'Annual Sales LY Label Color' = ```
+			IF([Sales Metric (CY)]>[Sales Metric (LY)], "#e5e5e5", "#0b4d78")
+			    
+			```
+		displayFolder: Formatting
+		lineageTag: 4bd36a44-4ce7-473f-ba85-65e98fa69067
+
+	measure 'Top Performers' = ```
+			
+			VAR _groupedByRegionEmployee = SUMMARIZE(Sales, Regions[Region], Employee[EmployeeID], "EmployeeTotalSalesMetricCY", [Sales Metric (CY)])
+			VAR _top3Performers = TOPN(3, _groupedByRegionEmployee, [EmployeeTotalSalesMetricCY], DESC, Employee[EmployeeID], ASC)
+			VAR _belowTop5Count = COUNTROWS(_groupedByRegionEmployee) - COUNTROWS(_top3Performers)
+			VAR _top5HTML = 
+			    CONCATENATEX(
+			        TOPN(3, _top3Performers, [EmployeeTotalSalesMetricCY], DESC),
+			        VAR _imageURL = LOOKUPVALUE(Employee[Image], Employee[EmployeeID], Employee[EmployeeID])
+			        VAR _salesMetricCY = [EmployeeTotalSalesMetricCY]
+			        VAR _rank = RANKX(_top3Performers, [EmployeeTotalSalesMetricCY],,DESC,Dense)
+			        RETURN
+			        "<div style='width:50px; height:50px; border-radius:50%; overflow:visible; border:2px solid #0b4d78; box-shadow:0 0 5px rgba(0,0,0,0.15); margin-left: 5px; position:relative;'>
+			            <!-- Profile Image -->
+			            <img src='" & _ImageURL & "' style='width:100%; height:100%; object-fit:cover; border-radius:50%;' />
+			            
+			            <!-- Top 5 Badge -->
+			            <div style='position:absolute; bottom:-8px; right:-8px; width:35px; height:35px; border-radius:50%; border:1px solid #CBD5E1; background-color:#0b4d78; color:white; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:9px;'>
+			                " & FORMAT(_salesMetricCY, "$#,0,.0K") & "
+			            </div>
+			        </div>",
+			        "",
+			        [EmployeeTotalSalesMetricCY], DESC
+			    )
+			VAR _additionalCircle = 
+			    IF(_belowTop5Count > 0, -- Only show grey circle if there are extras
+			        "<div style='width:30px; height:30px; border-radius:50%; background-color:#bfbfbf; color:white; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:16px; margin-left:5px;'>
+			
+			            +" & FORMAT(_belowTop5Count, "0") & "
+			        </div>",
+			        ""
+			    )
+			VAR _finalOutput = 
+			    "<div style='display:flex; align-items:center; justify-content:flex-end; overflow:hidden; max-width:400px; padding-right:5px; padding-bottom:8px'>
+			
+			        " & _top5HTML & _additionalCircle &"
+			    </div>"
+			RETURN
+			_finalOutput
+			    
+			```
+		displayFolder: Sales\Compares
+		lineageTag: 0000ccd2-28f8-4e20-a48e-a008a2177aa8
+
+	measure 'Sales CY Label' = ```
+			YEAR(MAX(DateTable[Date])) & " Sales"
+			    
+			```
+		displayFolder: Formatting
+		lineageTag: 5c83d18b-1d7a-4c68-a2b3-8b4e160153c3
+
+	measure 'Sales LY Label' = ```
+			VAR _selectYear = YEAR(MAX(DateTable[Date]))
+			RETURN
+			IF(
+			    _selectYear = 2022, "Previous year unavailable",
+			    _selectYear-1 & " Sales"
+			)
+			    
+			```
+		displayFolder: Formatting
+		lineageTag: f792e869-2c8f-4d0e-848a-4517a309a024
+
+	measure 'SVG Slicer Region SubTitle' = ```
+			IF(ISFILTERED(Products), "% w/in Product Selection", "% Overall")
+			    
+			```
+		displayFolder: Dynamic Slicers\2.0 % of Total
+		lineageTag: e2e968d3-a918-453c-b98a-619810e9decd
+
+	measure 'SVG Slicer Product SubTitle' = ```
+			IF(ISFILTERED(Regions), " % w/in Regional Selection", "% Overall")
+			    
+			```
+		displayFolder: Dynamic Slicers\2.0 % of Total
+		lineageTag: a21bc03b-530b-4f3c-8661-ddbfa1940170
+
+	measure 'SVG Slicer % of Total' = ```
+			--% of Total (Within Selection vs Overall)
+			-- Base value calculated total sales for each value
+			VAR _contextTotal = [Sales Metric (CY)]
+			-- Total sales of the dimension within scope
+			VAR _selectedTotal = 
+			    SWITCH(
+			        TRUE(),
+			        ISINSCOPE(Regions[Region]),CALCULATE([Sales Metric (CY)], REMOVEFILTERS(Regions[Region])),
+			        ISINSCOPE(Products[Product]),CALCULATE([Sales Metric (CY)], REMOVEFILTERS(Products[Product]))
+			    )
+			-- Annual overall total sales
+			VAR _overallTotal = CALCULATE([Sales Metric (CY)], REMOVEFILTERS(Products[Product]), REMOVEFILTERS(Regions[Region]))
+			-- The two percentage calculations to show
+			VAR __percentageWithinSelection = DIVIDE(_contextTotal, _selectedTotal)
+			VAR _percentageOverall = DIVIDE(_contextTotal, _overallTotal)
+			-- Logic determining which calculation to show
+			---- Region Slicer and Products are filtered -> show within selection
+			---- Product Slicer and Regions are filtered -> show within selection
+			---- Otherwise -> show overall
+			VAR _percentageDisplay = 
+			    SWITCH(
+			        TRUE(), 
+			        //Regional Slicer Conditions
+			        ISINSCOPE(Regions[Region]) && ISFILTERED(Products), __percentageWithinSelection,
+			        //Products Slicer Conditions
+			        ISINSCOPE(Products[Product]) && ISFILTERED(Regions), __percentageWithinSelection,
+			        //Default
+			        _percentageOverall
+			    )
+			RETURN
+			    IF( 
+			        NOT ISBLANK(_percentageDisplay) && _percentageDisplay <> 0, 
+			        FORMAT(_percentageDisplay, "0.0%"), 
+			        "-–"
+			    )
+			    
+			```
+		displayFolder: Dynamic Slicers\2.0 % of Total
+		lineageTag: 6b7d1ecd-f73f-4ae2-9ca4-bc60ccefaab5
+
+	measure 'SVG Slicer Styling (Sales Count)' = ```
+			"
+			<style>
+			.slicerTextDefault {
+			    font:9pt Segoe UI Regular;
+			    fill:#9FC2D9;
+			    text-anchor: end;
+			    alignment-baseline: middle
+			    }
+			
+			.slicerTextHover {
+			    font:9pt Segoe UI Regular;
+			    fill:#FFFFFF;
+			    text-anchor: end;
+			    alignment-baseline: middle
+			    }
+			
+			.slicerTextPressed {
+			    font:9pt Segoe UI Regular;
+			    fill:#FFFFFF;
+			    text-anchor: end;
+			    alignment-baseline: middle
+			    }
+			
+			.slicerTextSelected {
+			    font:9pt Segoe UI Regular;
+			    fill:#073450;
+			    text-anchor: end;
+			    alignment-baseline: middle
+			    }
+			</style>
+			"
+			    
+			```
+		displayFolder: Dynamic Slicers\1.0 Sales Count
+		lineageTag: 02747f82-99a4-4f8d-a11b-f74976e83fb2
+
+	measure 'SVG Slicer Display (% of Total)' = ```
+			-- The % of Total overall and within current selections 
+			    [SVG Slicer % of Total]
+			    
+			```
+		displayFolder: Dynamic Slicers\2.0 % of Total
+		lineageTag: 99b51638-1fb5-46c5-bf46-2535d4fa9969
+
+	measure 'SVG Slicer Default (% of Total)' = ```
+			"data:image/svg+xml;utf8,
+			<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100% 100%'>" & [SVG Slicer Styling (Sales Count)] & "
+			<rect x='0' y='0' width='100%' height='100%' fill='transparent'></rect>
+			<text x='100%' y='55%' class='slicerTextDefault'>(" & [SVG Slicer Display (% of Total)] & ")</text>
+			</svg>"
+			    
+			```
+		displayFolder: Dynamic Slicers\2.0 % of Total
+		lineageTag: 7b81f64d-4bff-4799-849b-1814dcd088b7
+
+	measure 'SVG Slicer Hover (% of Total)' = ```
+			"data:image/svg+xml;utf8,
+			<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100% 100%'>" & [SVG Slicer Styling (% of Total)] & "
+			<rect x='0' y='0' width='100%' height='100%' fill='transparent'></rect>
+			<text x='100%' y='55%' class='slicerTextHover'>(" & [SVG Slicer Display (% of Total)] & ")</text>
+			</svg>"
+			    
+			```
+		displayFolder: Dynamic Slicers\2.0 % of Total
+		lineageTag: 81e105ea-6ede-47e4-af77-936ca97e1d0b
+
+	measure 'SVG Slicer Pressed (% of Total)' = ```
+			"data:image/svg+xml;utf8,
+			<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100% 100%'>" & [SVG Slicer Styling (% of Total)] & "
+			<rect x='0' y='0' width='100%' height='100%' fill='transparent'></rect>
+			<text x='100%' y='55%' class='slicerTextPressed'>(" & [SVG Slicer Display (% of Total)] & ")</text>
+			</svg>"
+			    
+			```
+		displayFolder: Dynamic Slicers\2.0 % of Total
+		lineageTag: 369cf03e-ab86-4f17-9b76-8106da222adc
+
+	measure 'SVG Slicer Selected (% of Total)' = ```
+			"data:image/svg+xml;utf8,
+			<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100% 100%'>" & [SVG Slicer Styling (% of Total)] & "
+			<rect x='0' y='0' width='100%' height='100%' fill='transparent'></rect>
+			<text x='100%' y='55%' class='slicerTextSelected'>(" & [SVG Slicer Display (% of Total)] & ")</text>
+			</svg>"
+			    
+			```
+		displayFolder: Dynamic Slicers\2.0 % of Total
+		lineageTag: 83594688-8a79-41e5-9275-2da668cc7117
+
+	measure 'SVG Slicer Styling (% of Total)' = ```
+			"
+			<style>
+			.slicerTextDefault {
+			    font:9pt Segoe UI Regular;
+			    fill:#9FC2D9;
+			    text-anchor: end;
+			    alignment-baseline: middle
+			    }
+			
+			.slicerTextHover {
+			    font:9pt Segoe UI Regular;
+			    fill:#FFFFFF;
+			    text-anchor: end;
+			    alignment-baseline: middle
+			    }
+			
+			.slicerTextPressed {
+			    font:9pt Segoe UI Regular;
+			    fill:#FFFFFF;
+			    text-anchor: end;
+			    alignment-baseline: middle
+			    }
+			
+			.slicerTextSelected {
+			    font:9pt Segoe UI Regular;
+			    fill:#073450;
+			    text-anchor: end;
+			    alignment-baseline: middle
+			    }
+			</style>
+			"
+			    
+			```
+		displayFolder: Dynamic Slicers\2.0 % of Total
+		lineageTag: e2090e61-3e31-4646-a5e4-e37af7f2f19c
+
+	measure 'Current Date' = ```
+			DATE(2025, 9, 30) //TODAY()
+			
+			```
+		formatString: General Date
+		lineageTag: 08a51acc-71d9-4e96-8012-ffebebbb767e
+
+	measure 'Total Sales' = SUM(Sales[Amount])
+		formatString: 0
+		displayFolder: Sales
+		lineageTag: 91246bd0-c81d-4fdd-8a71-78be4a2233d2
+
+	column Placeholder
+		formatString: 0
+		displayFolder: Formatting
+		lineageTag: 3c4ae7f5-fd91-41fc-a91e-15584fc3f718
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Placeholder]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Measures = calculated
+		mode: import
+		source = Row("Placeholder", BLANK())
+
+	annotation PBI_Id = c68ab34aff7349e7ac3eadac001ac2f6
+

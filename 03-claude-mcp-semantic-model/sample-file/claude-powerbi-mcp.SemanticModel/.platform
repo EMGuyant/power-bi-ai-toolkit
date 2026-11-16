@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "claude-powerbi-mcp"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "cea185d6-8bc6-4a1f-917a-f0463b094b9b"
+  }
+}

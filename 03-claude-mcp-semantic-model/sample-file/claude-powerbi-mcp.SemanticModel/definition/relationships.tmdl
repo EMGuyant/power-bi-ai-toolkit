@@ -1,0 +1,17 @@
+relationship bd2d7820-107f-4b0e-93ba-926b8e066e36
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Sales.SalesDate
+	toColumn: LocalDateTable_8c493ee4-3ad6-4e77-801a-7c5f9c8e129c.Date
+
+relationship AutoDetected_db4dfc34-4b05-4e94-bf61-686d2c8f2258
+	fromColumn: Sales.EmployeeID
+	toColumn: Employee.EmployeeID
+
+relationship AutoDetected_7836582a-a608-438d-97df-cd70e094dc69
+	fromColumn: Sales.ProductID
+	toColumn: Products.ProductID
+
+relationship AutoDetected_cfd16486-1503-45c6-8300-9bd2e2dd0e5c
+	fromColumn: Sales.RegionID
+	toColumn: Regions.RegionID
+

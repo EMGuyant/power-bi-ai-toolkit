@@ -1,0 +1,82 @@
+table Employee
+	lineageTag: e1e05c25-ca02-46cb-be21-485aa0d7944f
+
+	column EmployeeID
+		dataType: int64
+		formatString: 0
+		lineageTag: f0a269c4-b418-4440-8402-51730690f942
+		summarizeBy: none
+		sourceColumn: EmployeeID
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmployeeName
+		dataType: string
+		lineageTag: 7cfef7bd-2586-4072-b1a7-8fe4b451b7a0
+		summarizeBy: none
+		sourceColumn: EmployeeName
+
+		annotation SummarizationSetBy = Automatic
+
+	column JobTitle
+		dataType: string
+		lineageTag: 2da7181f-1198-4761-b768-65e730146a23
+		summarizeBy: none
+		sourceColumn: JobTitle
+
+		annotation SummarizationSetBy = Automatic
+
+	column Department
+		dataType: string
+		lineageTag: 77562bd9-08ef-4b2d-a2de-68304d266108
+		summarizeBy: none
+		sourceColumn: Department
+
+		annotation SummarizationSetBy = Automatic
+
+	column ManagerID
+		dataType: string
+		lineageTag: e6f669cd-ade1-46fd-90dc-f641819b4d9c
+		summarizeBy: none
+		sourceColumn: ManagerID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Image
+		dataType: string
+		lineageTag: 5fbaa9e6-686b-4b8e-adb3-2668055121cb
+		dataCategory: ImageUrl
+		summarizeBy: none
+		sourceColumn: Image
+
+		annotation SummarizationSetBy = Automatic
+
+	column UPN
+		dataType: string
+		lineageTag: e7ba15a6-6d9d-4ef9-a906-fa6f98812377
+		summarizeBy: none
+		sourceColumn: UPN
+
+		annotation SummarizationSetBy = Automatic
+
+	column Role
+		dataType: string
+		lineageTag: 43ea67c8-1705-4736-837f-070808bfd4d7
+		summarizeBy: none
+		sourceColumn: Role
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Employee = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("zZhrT9tIFIb/ioW032o698tKaBUUIO0SWgGFXbr9MB6Pk2mdcWo7TeDX77EddtN0JVy6siphcJzJ5X183nPe4f37A3zw4uDcBRNNTbkuihQeXp9M38bv3l7EzXNXJndVdOmWcH7pauNzOGFwzOt6Wf368qVfmJmrDlehWuammh/aYvFyOS/qIsYccUQpl5xjFRsqnCEuk9y439ZHHKG/VggRYVZ1cZQV5cLU3YXM10e2LJbdo89HYrvQb3KfHJVJzA7RIX285tOjKV1vph9HNBsfq+lk83B3e3r/J5mradgoO3n95W6RV3d/bPIkrNfZpDk2ajr6hY7hB4SMKm+iVubBhxfvDwhcem2qpSuj312e+zDbRUL2kHSve3GARV8kRBHKEGVax8LazGYsSxinwyC5mPRC8u5qBwht9JscIF0UZenTmdsFQn+wRphmUiOMFJUyTpy2RCdEU4oGAkJ7ATlZwYe5HSiNulHqchfdmGAbIv9oBycFkFvuwuhfHpRQriliVMbKCiCRGIYzPpBjrl+rbHJ8n5C7ZXJ2o+5uefN8e2TjUceik7dwoW5J8IZE7jbRrc+TVnW7pvzkavBONKoqX9UGFu9c/R4iBBEN/UOCR2KbEqqlEkwjOwyRN32IfGWXRtfYu1kRXXnrwTbB7/qlKZzJ5U6NTC4bGrInDYoJF4wLJXRsnWbECMGdGsgtb64vv7s+GmVnpUnvo1Fp5/6r5tHUzthVfhY6u3RfoXkTTPoaBgmmpJBS4xih1FqtmWF0qBHz8fhpIC0G1dxqF0rv6hqG7QpGy6NZxu6Ly6G9PBcBY5JQqXlMs0QwoTOeUD1Q+7w+7alfw8mryngzj85NmD1q/6FZ+rML30sWGDXRopibAHHrvChdeNhCcMEXZXQSZj64lszj6bZX9jaDRDBAMMbQHZDBaSoJURlJB2IynvcsBoxbEsFHV3MH3yR0HN6aEmDNTN5m0u5v387IFDRDJikkCRYbnqqEYG14kgxVD3lf7aRV56Kz1db+vnS2Lsquda4yY+vV441XvccCJlRpKQnEhgwT7bBQyg7UBS/6DMlOfBMXz30KvpgUeV6szf321pdFurL1zlx8ngWYoBAUkMZY8VhgrghiLOVcDEWitwWaIHB+H4KLLosk8aHagsihPTwzPBIspICbDx0gTqTRTnJNnBgsPI4eIDav7UIvzO0mz85uVs2a9oBI/V8xGjcJYApWD9FxsXZhPz3+Ww7PyY5MwnYLE4QQbLaylNgkUUqnKR4MCHkCyP6EaIRNfenNIoLMNDeLb1pENzC7T4++gtKzVzANCZIgBW9AY5PQNNE8yZLhesXdd0fIdgZcuAoINLuMT+4bKm8gPZnaF62LendNwiBDECwVlzHjGcIkRRl4aKjyOKFPlMc+B9UOybr20akrgwmpe3hsn5CiU9fusk42zq5q/8VFOy9vV/XLVAjBOKGxZmmaIaJEmpGhwvSTftkHolvtJnVuCfN0WZtO6MjaYhW2u85TH7Zb9N67LMI0J/BLCx6DTQwxFAtBB8pR0+tXTzXSPQ6kGasnOcSn6Kaoqv/tvxE/e8DexfDhbw==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [EmployeeID = _t, EmployeeName = _t, UPN = _t, JobTitle = _t, Department = _t, ManagerID = _t, Image = _t, Role = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"EmployeeID", Int64.Type}, {"EmployeeName", type text}, {"JobTitle", type text}, {"Department", type text}, {"ManagerID", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

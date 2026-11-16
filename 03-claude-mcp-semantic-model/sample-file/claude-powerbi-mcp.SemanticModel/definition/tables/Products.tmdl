@@ -1,0 +1,49 @@
+table Products
+	lineageTag: 560d5100-26aa-4eee-8b3f-6e4d0b0eee0d
+
+	column ProductID
+		dataType: int64
+		formatString: 0
+		lineageTag: f4cca398-e8bd-4a09-8260-5bf98ad18243
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Product
+		dataType: string
+		lineageTag: 80176b84-d79a-4adf-84bb-3201c7cf324e
+		summarizeBy: none
+		sourceColumn: Product
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Code'
+		dataType: string
+		lineageTag: 98269724-3e7f-412e-ada5-70be12ec26b8
+		summarizeBy: none
+		sourceColumn: Product Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Image'
+		dataType: string
+		lineageTag: 4979f102-18f1-4dc2-a2c8-3c32b3848142
+		summarizeBy: none
+		sourceColumn: Product Image
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Products = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("zZlhaxs5EIb/SjDctyjRSBqN1GMpNYEE2kBpQ0tJ8kGrlRqXOHbtDU7//UmhEDfNhy2n4waMrVljmId3Ruadubycwexw9nEZNuP6ZnWXanAu0Gst5m9LcDOO6+2r4+PFMnxN26P7u+36NmxvjuJqeVx+MK4EoHdaEUi01grsndcIIWdPr/Oy+7b+enUvpbJhuf77e2flU7TrtJR78eLhdtF3m16YI3mk958vhu5c7x7Ov73R+WTuzs8eduHUy/4H7L58Hm7z2YPLp5/u63eP5zd/6ZPyml0fXs7UC3jkwIkPJxPxNCojJWkltZDYRxwoA4BmgadfUg88ivm7qXjWGWtJVsljsillN+TkPAs8UyDehfW4WtfDhbBaOnH6YRqa8RZcEaooZ4WTMfneueCQh3L4DM04T+LjVNUIpTIaqQgnVI9gTTYkIw80+wyNlP+D66QoVjQyTgRUvQlg5RAVCy4qBBehv01jPcwFGlDTG81LadGSqjq7OLghogmoJQs09wyNkGhyo6EFQGOsEU4lH4Zc/g+sef29c79yOHoKw/246vJqswzj08O8GLu4Wa3/Q9qDksXu8KAdlWVBZRtTERkGVCWLplSehVa+sVagWGDVNNpyaRZFWNNoy4U89MLWejkeXK41l+dRh75xHSpgoVdNoy2X4cFlWnMhizqsabTlIh56UWO9ilflwFXTaMsFLOqwptGWi4lBae1QNA+Lolt7FM3DpOjWLkXzsCm6tU8xPHyKae1TDA+fYlr7FGP24/+Pq6Sxu5odbDexu/oX4ygOYzb/fIJI4MT87dXdxEGbUYQAIEXxAor6PsWs5O/DG8egHh95QVbOT49vwpbOmz4GVmAlWS1Lt4qUVHIQBh3TwEJHgD0u0tZPn9xbsl4Wy4PGiSyph4H6jIHHvgXUHhegnj4DNrXpQEujLIk6wMdETkZiwlX3ZGcpDI9rsm0N3gttSyNNrsdyn2gkkiLoVCD7bEj1PODMC3DOK/0HRWk1oiu5ohIRcs5S5diHxIMPX+Arbs1PX1A4BMRyLSrlRd1NK4gxB+Cxe4G6L/scxnhTPy+EB/tTutn19T8=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [ProductID = _t, Product = _t, #"Product Code" = _t, #"Product Image" = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"ProductID", Int64.Type}, {"Product", type text}, {"Product Code", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
