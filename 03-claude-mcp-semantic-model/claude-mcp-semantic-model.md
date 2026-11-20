@@ -226,7 +226,7 @@ RETURN
 ## Guardrails
 
 - **Back up first.** Keep the project in Git. Each export rewrites every file in the definition folder, so `git diff` shows what actually changed.
-- **Set tool permissions by risk.** In **Settings** > **Connectors** > **powerbi-modeling-mcp**, set the read-only tools to **Always allow** and leave the write/delete tools on **Needs approval**.
+- **Set tool permissions by risk.** In Settings > Customize > Connectors > powerbi-modeling-mcp, set the read-only tools to Always allow and leave the write/delete tools on Needs approval. Choosing Always allow on a prompt in a chat can carry over to other chat session from then on, but this page still shows Needs approval. That includes Measure Operations, where allowing a read also allows writes, so use Allow once on its prompts.
 - **Know what leaves your machine.** Metadata, DAX expressions, and query results go into the conversation and are sent to Anthropic.
 
 ---
