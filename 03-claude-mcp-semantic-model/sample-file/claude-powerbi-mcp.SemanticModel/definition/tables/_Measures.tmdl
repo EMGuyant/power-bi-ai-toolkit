@@ -463,7 +463,7 @@ table _Measures
 		lineageTag: e2090e61-3e31-4646-a5e4-e37af7f2f19c
 
 	measure 'Current Date' = ```
-			DATE(2025, 9, 30) //TODAY()
+			DATE(2026, 9, 30) //TODAY()
 			
 			```
 		formatString: General Date

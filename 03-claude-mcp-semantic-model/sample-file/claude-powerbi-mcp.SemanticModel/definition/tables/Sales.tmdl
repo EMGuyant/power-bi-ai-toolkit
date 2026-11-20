@@ -47,11 +47,6 @@ table Sales
 		summarizeBy: none
 		sourceColumn: SalesDate
 
-		variation Variation
-			isDefault
-			relationship: bd2d7820-107f-4b0e-93ba-926b8e066e36
-			defaultHierarchy: LocalDateTable_8c493ee4-3ad6-4e77-801a-7c5f9c8e129c.'Date Hierarchy'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
